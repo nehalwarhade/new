@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+	  <style>
+  .capbox {
+  background-color: #92D433;
+  border: #B3E272 0px solid;
+  border-width: 0px 12px 0px 0px;
+  display: inline-block;
+  *display: inline; zoom: 1; /* FOR IE7-8 */
+  padding: 8px 40px 8px 8px;
+  }
+
+.capbox-inner {
+  font: bold 11px arial, sans-serif;
+  color: #000000;
+  background-color: #DBF3BA;
+  margin: 5px auto 0px auto;
+  padding: 3px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  }
+
+#CaptchaDiv {
+  font: bold 17px verdana, arial, sans-serif;
+  font-style: italic;
+  color: #000000;
+  background-color: #FFFFFF;
+  padding: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  }
+
+#CaptchaInput { margin: 1px 0px 1px 0px; width: 135px; }
+
+</style> 
+</head>
+<body>
+
+<nav class="nav navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				
+			</div>
+    <ul class="nav navbar-nav">
+
+        <li class="active"><a href="#">Home</a></li>
+        
+    </ul>
+	<ul class="nav navbar-nav navbar-right">
+
+   <li><a href="Login.html"><span class="glyphicon glyphicon-log-in" id="myBtn" ></span> Login</a></li>
+   <li><a href="Register.html"><span class="glyphicon glyphicon-user" id="myBtn1"></span>Register</a></li>
+   </ul>
+</div>
+</nav>
+<center><h4>Fill the below details and submit.</h4></center>
+<div class="container">
+<form method="POST" action="index.php">
+<div class="form-group">
+<div class="col-md-4 col-md-offset-4">
+    <label class="col-sm-4 control-label">Name :</label>
+    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" required />
+</div>
+<div class="col-md-4 col-md-offset-4">
+    <label class="col-sm-4 control-label">Email:</label>
+    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email" required />
+</div>
+<div class="col-md-4 col-md-offset-4">
+    <label class="col-sm-5 control-label">Web address:</label>
+    <input type="text" class="form-control" id="web address" placeholder="Enter web address" name="web address" required />
+    </div>
+    <div class="col-md-4 col-md-offset-4">
+    <label class="col-sm-4 control-label" name="coverletter">Cover letter:</label>
+    <textarea rows="4" cols="47"></textarea>
+</div>
+	<div class="col-md-4 col-md-offset-4">
+    <label class="col-sm-4 control-label">Attachment:</label>
+    <input type="file" class="form-control" id="filefield" multiple="multiple" name="attechment" >
+</div>
+<div class="col-md-4 col-md-offset-5"><br>
+    <b>Do  you  like  working ?</b>    
+</div>
+<div class="col-md-4 col-md-offset-5">
+yes<input type="radio" name="group" value=1>No
+<input type="radio" name="group" value=0 checked>
+</div>
+<br>
+<br>
+<div class="col-md-4 col-md-offset-5">
+
+
+<div class="capbox">
+
+<div id="CaptchaDiv"></div>
+
+<div class="capbox-inner">
+Type the above number:<br>
+
+<input type="hidden" id="txtCaptcha">
+<input type="text" name="CaptchaInput" id="CaptchaInput" size="15"><br>
+</div>
+</div>
+</div>
+<br><br>
+<br>
+<div class="col-md-4 col-md-offset-5">
+<input type="submit" class="btn btn-info" value="submit" name="submit">
+
+</div>
+</div>
+</div>
+</div>
+	</form>
+	</div>
+
+	<script type="text/javascript">
+
+function checkform(theform){
+var why = "";
+
+if(theform.CaptchaInput.value == ""){
+why += "- Please Enter CAPTCHA Code.\n";
+}
+if(theform.CaptchaInput.value != ""){
+if(ValidCaptcha(theform.CaptchaInput.value) == false){
+why += "- The CAPTCHA Code Does Not Match.\n";
+}
+}
+if(why != ""){
+alert(why);
+return false;
+}
+}
+
+var a = Math.ceil(Math.random() * 9)+ '';
+var b = Math.ceil(Math.random() * 9)+ '';
+var c = Math.ceil(Math.random() * 9)+ '';
+var d = Math.ceil(Math.random() * 9)+ '';
+var e = Math.ceil(Math.random() * 9)+ '';
+
+var code = a + b + c + d + e;
+document.getElementById("txtCaptcha").value = code;
+document.getElementById("CaptchaDiv").innerHTML = code;
+
+// Validate input against the generated number
+function ValidCaptcha(){
+var str1 = removeSpaces(document.getElementById('txtCaptcha').value);
+var str2 = removeSpaces(document.getElementById('CaptchaInput').value);
+if (str1 == str2){
+return true;
+}else{
+return false;
+}
+}
+
+// Remove the spaces from the entered and generated code
+function removeSpaces(string){
+return string.split(' ').join('');
+}
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
